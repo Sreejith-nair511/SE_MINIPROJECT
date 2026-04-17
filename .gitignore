@@ -41,3 +41,5 @@ coverage/
 .temp/
 *.pem
 *.key
+# clerk configuration (can include secrets)
+/.clerk/
