@@ -4,6 +4,14 @@ import { createAdminClient } from '@/lib/supabase-server';
 import { auth } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 
+function revalidateAll(courseId: string) {
+    revalidatePath('/', 'layout');
+    revalidatePath('/dashboard');
+    revalidatePath('/my-courses');
+    revalidatePath('/courses');
+    revalidatePath(`/courses/${courseId}`);
+}
+
 export async function enrollInCourse(courseId: string) {
     const { userId } = await auth();
     if (!userId) throw new Error('Unauthorized');
@@ -16,10 +24,7 @@ export async function enrollInCourse(courseId: string) {
 
     if (error) throw new Error(`Failed to enroll: ${error.message}`);
 
-    revalidatePath('/courses');
-    revalidatePath(`/courses/${courseId}`);
-    revalidatePath('/my-courses');
-    revalidatePath('/dashboard');
+    revalidateAll(courseId);
 }
 
 export async function updateCourseProgress(courseId: string, completed: boolean) {
@@ -39,8 +44,5 @@ export async function updateCourseProgress(courseId: string, completed: boolean)
 
     if (error) throw new Error(`Failed to update progress: ${error.message}`);
 
-    revalidatePath('/courses');
-    revalidatePath(`/courses/${courseId}`);
-    revalidatePath('/my-courses');
-    revalidatePath('/dashboard');
+    revalidateAll(courseId);
 }

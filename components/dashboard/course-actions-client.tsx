@@ -21,7 +21,7 @@ export function CourseActionsClient({ courseId, enrolled, completed, courseTitle
         startTransition(async () => {
             try {
                 await enrollInCourse(courseId);
-                router.refresh();
+                router.push('/my-courses');
             } catch (err) {
                 console.error(err);
             }
