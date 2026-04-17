@@ -4,14 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationItems } from '@/lib/constants';
 import {
-  BookOpen,
-  Brain,
-  FileText,
-  LayoutDashboard,
-  Sparkles,
-  Map,
-  Briefcase,
-  X,
+  BookOpen, Brain, FileText, LayoutDashboard,
+  Sparkles, Map, Briefcase, Code2, X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -22,6 +16,7 @@ const iconMap = {
   'Resume Builder': <FileText className="w-5 h-5" />,
   Hackathons: <Sparkles className="w-5 h-5" />,
   Roadmaps: <Map className="w-5 h-5" />,
+  Practice: <Code2 className="w-5 h-5" />,
   Jobs: <Briefcase className="w-5 h-5" />,
 };
 

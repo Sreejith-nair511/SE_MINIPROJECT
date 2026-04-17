@@ -79,20 +79,31 @@ export default async function CourseDetailPage({ params }: PageProps) {
           <div className="lg:col-span-2 space-y-6 md:space-y-8">
             {/* 16:9 Player Wrapper */}
             <div className="relative w-full aspect-video rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black group">
-              {course.youtube_playlist_id ? (
-                <iframe
-                  src={`https://www.youtube.com/embed/videoseries?list=${course.youtube_playlist_id}`}
-                  title={course.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full border-0"
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
-                  <GraduationCap className="w-12 h-12 md:w-20 md:h-20 mb-4 opacity-20" />
-                  <p className="font-bold text-sm md:text-base">Playlist content not available</p>
-                </div>
-              )}
+              {(() => {
+                // Extract video ID from youtube_url if available
+                const ytUrl = course.youtube_url || '';
+                const videoIdMatch = ytUrl.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+                const videoId = videoIdMatch?.[1];
+                const embedSrc = videoId
+                  ? `https://www.youtube.com/embed/${videoId}?rel=0`
+                  : course.youtube_playlist_id
+                  ? `https://www.youtube.com/embed/videoseries?list=${course.youtube_playlist_id}`
+                  : null;
+                return embedSrc ? (
+                  <iframe
+                    src={embedSrc}
+                    title={course.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                    <GraduationCap className="w-12 h-12 md:w-20 md:h-20 mb-4 opacity-20" />
+                    <p className="font-bold text-sm md:text-base">Video not available</p>
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Title & Description */}
