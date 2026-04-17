@@ -27,32 +27,38 @@ const iconMap = {
     Cpu: <Cpu className="w-6 h-6" />,
 };
 
-const roadmapMilestones = [
-    {
-        level: "Phase 1: Foundations",
-        items: [
-            { title: "Introduction to the Ecosystem", duration: "1-2 weeks", status: "completed" },
-            { title: "Core Concepts & Syntax", duration: "2-3 weeks", status: "current" },
-            { title: "Development Environment Setup", duration: "1 week", status: "pending" }
-        ]
-    },
-    {
-        level: "Phase 2: Core Engineering",
-        items: [
-            { title: "Advanced Architecture Patterns", duration: "4 weeks", status: "pending" },
-            { title: "State Management & Data Flow", duration: "3 weeks", status: "pending" },
-            { title: "Testing & Documentation", duration: "2 weeks", status: "pending" }
-        ]
-    },
-    {
-        level: "Phase 3: Industry Readiness",
-        items: [
-            { title: "Performance Optimization", duration: "2 weeks", status: "pending" },
-            { title: "System Design for Scalability", duration: "3 weeks", status: "pending" },
-            { title: "Capstone Project & Portfolio", duration: "4 weeks", status: "pending" }
-        ]
-    }
-];
+const roadmapData: Record<string, { level: string; items: { title: string; duration: string; status: string }[] }[]> = {
+    'Frontend Engineering': [
+        { level: 'Phase 1: Foundations', items: [{ title: 'HTML5, CSS3 & Responsive Design', duration: '2 weeks', status: 'completed' }, { title: 'JavaScript ES6+ Fundamentals', duration: '3 weeks', status: 'current' }, { title: 'Git & Version Control', duration: '1 week', status: 'pending' }] },
+        { level: 'Phase 2: Core Frameworks', items: [{ title: 'React & Component Architecture', duration: '4 weeks', status: 'pending' }, { title: 'State Management (Redux/Zustand)', duration: '2 weeks', status: 'pending' }, { title: 'TypeScript for Frontend', duration: '2 weeks', status: 'pending' }] },
+        { level: 'Phase 3: Industry Readiness', items: [{ title: 'Next.js & SSR/SSG', duration: '3 weeks', status: 'pending' }, { title: 'Testing (Jest, Cypress)', duration: '2 weeks', status: 'pending' }, { title: 'Performance & Web Vitals', duration: '2 weeks', status: 'pending' }] },
+    ],
+    'Backend Engineering': [
+        { level: 'Phase 1: Foundations', items: [{ title: 'Node.js & Async Programming', duration: '2 weeks', status: 'completed' }, { title: 'REST API Design & Express', duration: '3 weeks', status: 'current' }, { title: 'SQL & PostgreSQL Basics', duration: '2 weeks', status: 'pending' }] },
+        { level: 'Phase 2: Core Engineering', items: [{ title: 'Authentication & Authorization (JWT)', duration: '2 weeks', status: 'pending' }, { title: 'Caching with Redis', duration: '2 weeks', status: 'pending' }, { title: 'Message Queues (RabbitMQ/Kafka)', duration: '3 weeks', status: 'pending' }] },
+        { level: 'Phase 3: Scale & Production', items: [{ title: 'Microservices Architecture', duration: '4 weeks', status: 'pending' }, { title: 'Docker & Containerization', duration: '2 weeks', status: 'pending' }, { title: 'System Design & Scalability', duration: '3 weeks', status: 'pending' }] },
+    ],
+    'Full Stack Development': [
+        { level: 'Phase 1: Foundations', items: [{ title: 'HTML, CSS, JavaScript Essentials', duration: '3 weeks', status: 'completed' }, { title: 'React Frontend Development', duration: '4 weeks', status: 'current' }, { title: 'Node.js & Express Backend', duration: '3 weeks', status: 'pending' }] },
+        { level: 'Phase 2: Full Stack Integration', items: [{ title: 'Database Design (SQL + NoSQL)', duration: '3 weeks', status: 'pending' }, { title: 'REST & GraphQL APIs', duration: '3 weeks', status: 'pending' }, { title: 'Authentication & Security', duration: '2 weeks', status: 'pending' }] },
+        { level: 'Phase 3: Production Ready', items: [{ title: 'Next.js Full Stack App', duration: '4 weeks', status: 'pending' }, { title: 'CI/CD & Deployment (Vercel/AWS)', duration: '2 weeks', status: 'pending' }, { title: 'Capstone Project', duration: '4 weeks', status: 'pending' }] },
+    ],
+    'DevOps & Cloud': [
+        { level: 'Phase 1: Foundations', items: [{ title: 'Linux & Shell Scripting', duration: '2 weeks', status: 'completed' }, { title: 'Docker & Containerization', duration: '3 weeks', status: 'current' }, { title: 'Git & CI/CD Basics', duration: '1 week', status: 'pending' }] },
+        { level: 'Phase 2: Cloud & Orchestration', items: [{ title: 'AWS Core Services (EC2, S3, RDS)', duration: '4 weeks', status: 'pending' }, { title: 'Kubernetes & Container Orchestration', duration: '4 weeks', status: 'pending' }, { title: 'Infrastructure as Code (Terraform)', duration: '3 weeks', status: 'pending' }] },
+        { level: 'Phase 3: Advanced DevOps', items: [{ title: 'Monitoring & Observability (Prometheus)', duration: '2 weeks', status: 'pending' }, { title: 'Security & Compliance (DevSecOps)', duration: '2 weeks', status: 'pending' }, { title: 'AWS Solutions Architect Prep', duration: '4 weeks', status: 'pending' }] },
+    ],
+    'Data Engineering': [
+        { level: 'Phase 1: Foundations', items: [{ title: 'Python for Data Engineering', duration: '2 weeks', status: 'completed' }, { title: 'SQL & Database Fundamentals', duration: '2 weeks', status: 'current' }, { title: 'Data Modeling Concepts', duration: '1 week', status: 'pending' }] },
+        { level: 'Phase 2: Pipeline Engineering', items: [{ title: 'Apache Spark & PySpark', duration: '4 weeks', status: 'pending' }, { title: 'Airflow & Workflow Orchestration', duration: '3 weeks', status: 'pending' }, { title: 'Data Warehousing (Snowflake/BigQuery)', duration: '3 weeks', status: 'pending' }] },
+        { level: 'Phase 3: Advanced Topics', items: [{ title: 'Kafka & Real-time Streaming', duration: '3 weeks', status: 'pending' }, { title: 'dbt & Analytics Engineering', duration: '2 weeks', status: 'pending' }, { title: 'Cloud Data Platforms (AWS/GCP)', duration: '3 weeks', status: 'pending' }] },
+    ],
+    'Machine Learning': [
+        { level: 'Phase 1: Foundations', items: [{ title: 'Python, NumPy & Pandas', duration: '2 weeks', status: 'completed' }, { title: 'Statistics & Linear Algebra', duration: '3 weeks', status: 'current' }, { title: 'Data Visualization (Matplotlib)', duration: '1 week', status: 'pending' }] },
+        { level: 'Phase 2: Core ML', items: [{ title: 'Supervised & Unsupervised Learning', duration: '4 weeks', status: 'pending' }, { title: 'Deep Learning & Neural Networks', duration: '4 weeks', status: 'pending' }, { title: 'Model Evaluation & Tuning', duration: '2 weeks', status: 'pending' }] },
+        { level: 'Phase 3: Production ML', items: [{ title: 'NLP & Transformers (HuggingFace)', duration: '4 weeks', status: 'pending' }, { title: 'MLOps & Model Deployment', duration: '3 weeks', status: 'pending' }, { title: 'LLMs & Generative AI', duration: '4 weeks', status: 'pending' }] },
+    ],
+};
 
 export default function RoadmapsPage() {
     const [selectedBranch, setSelectedBranch] = useState(engineeringBranches[0]);
@@ -149,10 +155,10 @@ export default function RoadmapsPage() {
 
                             {/* Timeline */}
                             <div className="space-y-12">
-                                {roadmapMilestones.map((phase, phaseIdx) => (
+                                {(roadmapData[selectedBranch.title] || []).map((phase, phaseIdx) => (
                                     <div key={phaseIdx} className="relative">
                                         {/* Vertical Line Connector */}
-                                        {phaseIdx !== roadmapMilestones.length - 1 && (
+                                        {phaseIdx !== (roadmapData[selectedBranch.title] || []).length - 1 && (
                                             <div className="absolute left-[19px] top-[40px] bottom-[-40px] w-0.5 bg-gradient-to-b from-primary/50 to-transparent z-0" />
                                         )}
 
