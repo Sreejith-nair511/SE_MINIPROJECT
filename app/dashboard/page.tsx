@@ -54,6 +54,7 @@ export default async function DashboardPage() {
           name={user?.firstName || 'Developer'}
           completedCourses={progressData?.filter((p: any) => p.completed).length || 0}
           totalCourses={enrolledCourses.length || 0}
+          inProgressCourses={enrolledCourses.length - (progressData?.filter((p: any) => p.completed).length || 0)}
         />
 
         {/* Quick Stats — real data */}

@@ -90,25 +90,20 @@ export default async function MyCoursesPage() {
                     </div>
                 )}
 
-                {/* Achievement Stats (Placeholder for future) */}
+                {/* Stats Bar */}
                 {enrolledCourses.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-white/5">
-                        <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/5">
-                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Total Enrolled</p>
-                            <p className="text-3xl font-black text-white">{enrolledCourses.length}</p>
-                        </div>
-                        <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/5">
-                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Completed</p>
-                            <p className="text-3xl font-black text-emerald-400">
-                                {enrolledCourses.filter((c: any) => userProgress[c.id] === 100).length}
-                            </p>
-                        </div>
-                        <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/5">
-                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">In Progress</p>
-                            <p className="text-3xl font-black text-primary">
-                                {enrolledCourses.filter((c: any) => userProgress[c.id] < 100).length}
-                            </p>
-                        </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {[
+                            { label: 'Total Enrolled', value: enrolledCourses.length, color: 'text-white', bg: 'bg-blue-500/10 border-blue-500/20' },
+                            { label: 'Completed', value: enrolledCourses.filter((c: any) => userProgress[c.id] === 100).length, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
+                            { label: 'In Progress', value: enrolledCourses.filter((c: any) => userProgress[c.id] > 0 && userProgress[c.id] < 100).length, color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+                            { label: 'Not Started', value: enrolledCourses.filter((c: any) => !userProgress[c.id]).length, color: 'text-slate-400', bg: 'bg-white/5 border-white/10' },
+                        ].map(stat => (
+                            <div key={stat.label} className={`p-5 rounded-2xl border ${stat.bg} flex flex-col gap-1`}>
+                                <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest">{stat.label}</p>
+                                <p className={`text-3xl font-black ${stat.color}`}>{stat.value}</p>
+                            </div>
+                        ))}
                     </div>
                 )}
             </div>
